@@ -139,7 +139,8 @@ class Search extends SearchDelegate {
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<Item> items = loadData();
+    List<Item> items =
+        loadData(); // todo: this line is not working due to Future<>
     DataViewer db = DataViewer(items);
     List<Week> weeks = db.itemsByWeeks.keys.toList();
     return Scaffold(
