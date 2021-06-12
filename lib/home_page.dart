@@ -1,60 +1,11 @@
 import 'package:flutter/material.dart';
+import 'http_client.dart';
+import 'data_objects.dart';
 
-enum ItemType { document, pdf, slideshow, spreadsheet, photo, video, directory }
-
-class Week {
-  final int semester;
-  final int week;
-  Week({@required this.semester, @required this.week});
-
-  @override
-  bool operator ==(other) {
-    bool ret =
-        (other is Week) && other.semester == semester && other.week == week;
-    return ret;
-  }
-
-  @override
-  String toString() {
-    Map<int, String> sem = {1: "א", 2: "ב", 3: "ג", 4: "ד", 5: "ה", 6: "ו"};
-    return week.toString() + " סמסטר " + sem[semester] + " שבוע";
-  }
-}
-
-// todo: file names, search bar, drag to upload
-
-class Item {
-  // machzor
-  final String url;
-  final ItemType type;
-  final DateTime creationTime;
-  // final DateTime lastModified;
-  final String title;
-  final Week week;
-  Item({
-    @required this.url,
-    @required this.type,
-    @required this.creationTime,
-    // @required this.lastModified,
-    @required this.title,
-    @required this.week,
-  });
-}
-
-Map<ItemType, String> typeIcon = {
-  ItemType.document: "images/google-docs.png",
-  ItemType.slideshow: 'images/google-slides.png',
-  ItemType.pdf: 'images/google-pdf2.png',
-  ItemType.directory: 'images/google-folder.png',
-  ItemType.photo: 'images/google-docs.png',
-  ItemType.video: 'images/google-video.png',
-  ItemType.spreadsheet: 'images/google-sheets.png'
-};
-
-class Database {
+class DataViewer {
   Map<Week, List<Item>> itemsByWeeks;
 
-  Database(List<Item> items) {
+  DataViewer(List<Item> items) {
     itemsByWeeks = new Map<Week, List<Item>>();
     for (int i = 0; i < items.length; i++) {
       bool containsKey = false;
@@ -76,56 +27,56 @@ class Database {
   }
 }
 
-List<Item> items = [
-  Item(
-      creationTime: DateTime.parse("2021-05-27 13:27:00"),
-      url: "jbjkbsak",
-      type: ItemType.video,
-      title: "מתן גץ",
-      week: Week(semester: 6, week: 11)),
-  Item(
-      creationTime: DateTime.parse("2021-05-26 13:27:00"),
-      url: "jbjkbsak",
-      type: ItemType.document,
-      title: "יובל נבו",
-      week: Week(semester: 6, week: 11)),
-  Item(
-      creationTime: DateTime.parse("2021-05-24 13:27:00"),
-      url: "jbjkbsak",
-      type: ItemType.directory,
-      title: "מסע ציונות",
-      week: Week(semester: 6, week: 11)),
-  Item(
-      creationTime: DateTime.parse("2021-05-24 13:27:00"),
-      url: "jbjkbsak",
-      type: ItemType.spreadsheet,
-      title: "מסע ציונות",
-      week: Week(semester: 6, week: 11)),
-  Item(
-      creationTime: DateTime.parse("2021-05-24 13:27:00"),
-      url: "jbjkbsak",
-      type: ItemType.slideshow,
-      title: "מסע ציונות",
-      week: Week(semester: 6, week: 11)),
-  Item(
-      creationTime: DateTime.parse("2021-05-24 13:27:00"),
-      url: "jbjkbsak",
-      type: ItemType.slideshow,
-      title: "נועה קורן",
-      week: Week(semester: 6, week: 10)),
-  Item(
-      creationTime: DateTime.parse("2021-05-24 13:27:00"),
-      url: "jbjkbsak",
-      type: ItemType.pdf,
-      title: "אלון גרנות",
-      week: Week(semester: 6, week: 9)),
-  Item(
-      creationTime: DateTime.parse("2021-05-24 13:27:00"),
-      url: "jbjkbsak",
-      type: ItemType.slideshow,
-      title: "מסע ציונות",
-      week: Week(semester: 6, week: 9))
-];
+// List<Item> items = [
+//   Item(
+//       creationTime: DateTime.parse("2021-05-27 13:27:00"),
+//       url: "jbjkbsak",
+//       type: ItemType.video,
+//       title: "מתן גץ",
+//       week: Week(semester: 6, week: 11)),
+//   Item(
+//       creationTime: DateTime.parse("2021-05-26 13:27:00"),
+//       url: "jbjkbsak",
+//       type: ItemType.document,
+//       title: "יובל נבו",
+//       week: Week(semester: 6, week: 11)),
+//   Item(
+//       creationTime: DateTime.parse("2021-05-24 13:27:00"),
+//       url: "jbjkbsak",
+//       type: ItemType.directory,
+//       title: "מסע ציונות",
+//       week: Week(semester: 6, week: 11)),
+//   Item(
+//       creationTime: DateTime.parse("2021-05-24 13:27:00"),
+//       url: "jbjkbsak",
+//       type: ItemType.spreadsheet,
+//       title: "מסע ציונות",
+//       week: Week(semester: 6, week: 11)),
+//   Item(
+//       creationTime: DateTime.parse("2021-05-24 13:27:00"),
+//       url: "jbjkbsak",
+//       type: ItemType.slideshow,
+//       title: "מסע ציונות",
+//       week: Week(semester: 6, week: 11)),
+//   Item(
+//       creationTime: DateTime.parse("2021-05-24 13:27:00"),
+//       url: "jbjkbsak",
+//       type: ItemType.slideshow,
+//       title: "נועה קורן",
+//       week: Week(semester: 6, week: 10)),
+//   Item(
+//       creationTime: DateTime.parse("2021-05-24 13:27:00"),
+//       url: "jbjkbsak",
+//       type: ItemType.pdf,
+//       title: "אלון גרנות",
+//       week: Week(semester: 6, week: 9)),
+//   Item(
+//       creationTime: DateTime.parse("2021-05-24 13:27:00"),
+//       url: "jbjkbsak",
+//       type: ItemType.slideshow,
+//       title: "מסע ציונות",
+//       week: Week(semester: 6, week: 9))
+// ];
 
 class Search extends SearchDelegate {
   String selectedResult = "";
@@ -188,7 +139,8 @@ class Search extends SearchDelegate {
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Database db = Database(items);
+    List<Item> items = loadData();
+    DataViewer db = DataViewer(items);
     List<Week> weeks = db.itemsByWeeks.keys.toList();
     return Scaffold(
       backgroundColor: Colors.black87,
