@@ -12,7 +12,7 @@ Future<List<Item>> loadData() async {
     },
     // todo: decide on request body
     body: jsonEncode(<String, String>{
-      'title': 'mytitle',
+      'title': 'mytitle', // todo: decide on request body
     }),
   );
 

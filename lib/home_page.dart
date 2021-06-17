@@ -27,56 +27,56 @@ class DataViewer {
   }
 }
 
-// List<Item> items = [
-//   Item(
-//       creationTime: DateTime.parse("2021-05-27 13:27:00"),
-//       url: "jbjkbsak",
-//       type: ItemType.video,
-//       title: "מתן גץ",
-//       week: Week(semester: 6, week: 11)),
-//   Item(
-//       creationTime: DateTime.parse("2021-05-26 13:27:00"),
-//       url: "jbjkbsak",
-//       type: ItemType.document,
-//       title: "יובל נבו",
-//       week: Week(semester: 6, week: 11)),
-//   Item(
-//       creationTime: DateTime.parse("2021-05-24 13:27:00"),
-//       url: "jbjkbsak",
-//       type: ItemType.directory,
-//       title: "מסע ציונות",
-//       week: Week(semester: 6, week: 11)),
-//   Item(
-//       creationTime: DateTime.parse("2021-05-24 13:27:00"),
-//       url: "jbjkbsak",
-//       type: ItemType.spreadsheet,
-//       title: "מסע ציונות",
-//       week: Week(semester: 6, week: 11)),
-//   Item(
-//       creationTime: DateTime.parse("2021-05-24 13:27:00"),
-//       url: "jbjkbsak",
-//       type: ItemType.slideshow,
-//       title: "מסע ציונות",
-//       week: Week(semester: 6, week: 11)),
-//   Item(
-//       creationTime: DateTime.parse("2021-05-24 13:27:00"),
-//       url: "jbjkbsak",
-//       type: ItemType.slideshow,
-//       title: "נועה קורן",
-//       week: Week(semester: 6, week: 10)),
-//   Item(
-//       creationTime: DateTime.parse("2021-05-24 13:27:00"),
-//       url: "jbjkbsak",
-//       type: ItemType.pdf,
-//       title: "אלון גרנות",
-//       week: Week(semester: 6, week: 9)),
-//   Item(
-//       creationTime: DateTime.parse("2021-05-24 13:27:00"),
-//       url: "jbjkbsak",
-//       type: ItemType.slideshow,
-//       title: "מסע ציונות",
-//       week: Week(semester: 6, week: 9))
-// ];
+List<Item> items = [
+  Item(
+      creationTime: DateTime.parse("2021-05-27 13:27:00"),
+      url: "jbjkbsak",
+      type: ItemType.video,
+      title: "מתן גץ",
+      week: Week(semester: 6, week: 11)),
+  Item(
+      creationTime: DateTime.parse("2021-05-26 13:27:00"),
+      url: "jbjkbsak",
+      type: ItemType.document,
+      title: "יובל נבו",
+      week: Week(semester: 6, week: 11)),
+  Item(
+      creationTime: DateTime.parse("2021-05-24 13:27:00"),
+      url: "jbjkbsak",
+      type: ItemType.directory,
+      title: "מסע ציונות",
+      week: Week(semester: 6, week: 11)),
+  Item(
+      creationTime: DateTime.parse("2021-05-24 13:27:00"),
+      url: "jbjkbsak",
+      type: ItemType.spreadsheet,
+      title: "מסע ציונות",
+      week: Week(semester: 6, week: 11)),
+  Item(
+      creationTime: DateTime.parse("2021-05-24 13:27:00"),
+      url: "jbjkbsak",
+      type: ItemType.slideshow,
+      title: "מסע ציונות",
+      week: Week(semester: 6, week: 11)),
+  Item(
+      creationTime: DateTime.parse("2021-05-24 13:27:00"),
+      url: "jbjkbsak",
+      type: ItemType.slideshow,
+      title: "נועה קורן",
+      week: Week(semester: 6, week: 10)),
+  Item(
+      creationTime: DateTime.parse("2021-05-24 13:27:00"),
+      url: "jbjkbsak",
+      type: ItemType.pdf,
+      title: "אלון גרנות",
+      week: Week(semester: 6, week: 9)),
+  Item(
+      creationTime: DateTime.parse("2021-05-24 13:27:00"),
+      url: "jbjkbsak",
+      type: ItemType.slideshow,
+      title: "מסע ציונות",
+      week: Week(semester: 6, week: 9))
+];
 
 class Search extends SearchDelegate {
   String selectedResult = "";
@@ -139,8 +139,8 @@ class Search extends SearchDelegate {
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<Item> items =
-        loadData(); // todo: this line is not working due to Future<>
+    // List<Item> items =
+    // loadData(); // todo: this line is not working due to Future<>
     DataViewer db = DataViewer(items);
     List<Week> weeks = db.itemsByWeeks.keys.toList();
     return Scaffold(
