@@ -141,6 +141,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     // List<Item> items =
     // loadData(); // todo: this line is not working due to Future<>
+    print("Im hereee");
+    print(update());
     DataViewer db = DataViewer(items);
     List<Week> weeks = db.itemsByWeeks.keys.toList();
     return Scaffold(

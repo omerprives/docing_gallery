@@ -2,6 +2,28 @@ import 'dart:async';
 import 'data_objects.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'dart:io';
+
+var IP = 'http://127.0.0.1:8000/';
+
+dynamic update() {
+  var data;
+  var updateFile = File("update").create();
+  data = Process.runSync('curl', ['-X', 'POST', '--upload-file', 'update', IP]);
+
+  // data = json.decode(data.stdout);
+  //data = change to list of objects
+  data = jsonDecode(data.stdout);
+  print(data);
+  List<Item> ret = [];
+  for (Map i in data["body"]) {
+    try {
+      ret.add(Item.fromJson(i));
+    } catch (exception) {
+      print("cannot add item");
+    }
+  }
+}
 
 Future<List<Item>> loadData() async {
   print("loading data...");
