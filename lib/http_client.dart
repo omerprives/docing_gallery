@@ -6,7 +6,7 @@ import 'dart:io';
 
 var IP = 'http://127.0.0.1:8000/';
 
-dynamic update() {
+List<Item> update() {
   var data;
   var updateFile = File("update").create();
   data = Process.runSync('curl', ['-X', 'POST', '--upload-file', 'update', IP]);
@@ -16,13 +16,14 @@ dynamic update() {
   data = jsonDecode(data.stdout);
   print(data);
   List<Item> ret = [];
-  for (Map i in data["body"]) {
+  for (Map i in data) {
     try {
       ret.add(Item.fromJson(i));
     } catch (exception) {
       print("cannot add item");
     }
   }
+  return ret;
 }
 
 Future<List<Item>> loadData() async {

@@ -27,6 +27,7 @@ class DataViewer {
   }
 }
 
+/*
 List<Item> items = [
   Item(
       creationTime: DateTime.parse("2021-05-27 13:27:00"),
@@ -77,6 +78,7 @@ List<Item> items = [
       title: "מסע ציונות",
       week: Week(semester: 6, week: 9))
 ];
+*/
 
 class Search extends SearchDelegate {
   String selectedResult = "";
@@ -139,10 +141,11 @@ class Search extends SearchDelegate {
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // List<Item> items =
-    // loadData(); // todo: this line is not working due to Future<>
     print("Im hereee");
-    print(update());
+    List<Item> items = update();
+    // loadData(); // todo: this line is not working due to Future<>
+
+    // print(update());
     DataViewer db = DataViewer(items);
     List<Week> weeks = db.itemsByWeeks.keys.toList();
     return Scaffold(
